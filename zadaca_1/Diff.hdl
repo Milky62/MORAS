@@ -1,0 +1,34 @@
+CHIP Diff {
+	IN a[16], b[16];
+	OUT out[16];
+	PARTS:
+	Xor(a = a[0], b = b[0], out = xor0);
+	Xor(a = a[1], b = b[1], out = xor1);
+	Xor(a = a[2], b = b[2], out = xor2);
+	Xor(a = a[3], b = b[3], out = xor3);
+	Xor(a = a[4], b = b[4], out = xor4);
+	Xor(a = a[5], b = b[5], out = xor5);
+	Xor(a = a[6], b = b[6], out = xor6);
+	Xor(a = a[7], b = b[7], out = xor7);
+	Xor(a = a[8], b = b[8], out = xor8);
+	Xor(a = a[9], b = b[9], out = xor9);
+	Xor(a = a[10], b = b[10], out = xor10);
+	Xor(a = a[11], b = b[11], out = xor11);
+	Xor(a = a[12], b = b[12], out = xor12);
+	Xor(a = a[13], b = b[13], out = xor13);
+	Xor(a = a[14], b = b[14], out = xor14);
+	Xor(a = a[15], b = b[15], out = xor15);
+	
+	
+	FullAdder(a = xor0, b = xor1, c = false, sum = out[0], carry = carry0);
+	FullAdder(a = xor2, b = xor3, c = carry0, sum = out[1], carry = carry1);
+	FullAdder(a = xor4, b = xor5, c = carry1, sum = out[2], carry = carry2);
+	FullAdder(a = xor6, b = xor7, c = carry2, sum = out[3], carry = carry3);
+	FullAdder(a = xor8, b = xor9, c = carry3, sum = out[4], carry = carry4);
+	FullAdder(a = xor10, b = xor11, c = carry4, sum = out[5], carry = carry5);
+	FullAdder(a = xor12, b = xor13, c = carry5, sum = out[6], carry = carry6);
+	FullAdder(a = xor14, b = xor15, c = carry6, sum = out[7], carry = carry7);
+	
+	
+	
+}
