@@ -1,0 +1,59 @@
+CHIP Clz {
+    IN in[16];
+    OUT out[16];
+
+    PARTS:
+    Inc16(in=false, out=b1);      // 1
+    Inc16(in=b1, out=b2);         // 2
+    Inc16(in=b2, out=b3);         // 3
+    Inc16(in=b3, out=b4);         // 4
+    Inc16(in=b4, out=b5);         // 5
+    Inc16(in=b5, out=b6);         // 6
+    Inc16(in=b6, out=b7);         // 7
+    Inc16(in=b7, out=b8);         // 8
+    Inc16(in=b8, out=b9);         // 9
+    Inc16(in=b9, out=b10);        // 10
+    Inc16(in=b10, out=b11);       // 11
+    Inc16(in=b11, out=b12);       // 12
+    Inc16(in=b12, out=b13);       // 13
+    Inc16(in=b13, out=b14);       // 14
+    Inc16(in=b14, out=b15);       // 15
+	Inc16(in=b15, out=b16);   // u slucaju da su svi 0
+	
+	
+	Or(a=in[15], b=in[14], out=o1);
+    Or(a=o1, b=in[13], out=o2);
+    Or(a=o2, b=in[12], out=o3);
+    Or(a=o3, b=in[11], out=o4);
+    Or(a=o4, b=in[10], out=o5);
+    Or(a=o5, b=in[9], out=o6);
+    Or(a=o6, b=in[8], out=o7);
+    Or(a=o7, b=in[7], out=o8);
+    Or(a=o8, b=in[6], out=o9);
+    Or(a=o9, b=in[5], out=o10);
+    Or(a=o10, b=in[4], out=o11);
+    Or(a=o11, b=in[3], out=o12);
+    Or(a=o12, b=in[2], out=o13);
+    Or(a=o13, b=in[1], out=o14);
+    Or(a=o14, b=in[0], out=anyOne); // 1 ako postoji barem jedan '1'
+
+
+    Mux16(a=b16, b=b15, sel=in[0], out=v0); 
+    Mux16(a=b15, b=b14, sel=in[1], out=v1);
+    Mux16(a=v1, b=b13, sel=in[2], out=v2);
+    Mux16(a=v2, b=b12, sel=in[3], out=v3);
+    Mux16(a=v3, b=b11, sel=in[4], out=v4);
+    Mux16(a=v4, b=b10, sel=in[5], out=v5);
+    Mux16(a=v5, b=b9, sel=in[6], out=v6);
+    Mux16(a=v6, b=b8, sel=in[7], out=v7);
+    Mux16(a=v7, b=b7, sel=in[8], out=v8);
+    Mux16(a=v8, b=b6, sel=in[9], out=v9);
+    Mux16(a=v9, b=b5, sel=in[10], out=v10);
+    Mux16(a=v10, b=b4, sel=in[11], out=v11);
+    Mux16(a=v11, b=b3, sel=in[12], out=v12);
+    Mux16(a=v12, b=b2, sel=in[13], out=v13);
+    Mux16(a=v13, b=b1, sel=in[14], out=v14);
+    Mux16(a=v14, b=false, sel=in[15], out=vFinal);
+	
+	Mux16(a=b16, b=vFinal, sel=anyOne, out=out); // ako su svi nule, izlaz je 16
+	}
