@@ -1,0 +1,39 @@
+CHIP RAM512{
+
+	IN in[16], address[9], load;
+	OUT out[16];
+	
+	PARTS:
+	
+	//DMux8Way dijeli load na osam linija na temelju selektora address[6..8]
+	
+	DMux8Way(in = load, sel = address[6..8],
+			a = load0, b = load1, c = load2,
+			d = load3, e = load4, f = load5,
+			g = load6, h = load7);
+	
+	// koristenjem 3 bita u addr[6..8] odredjujemo koji od 8x RAM64 cipova ce biti koristen za upis ili citanje podataka
+	
+	
+	// koristit cemo 8x RAM64 registra
+
+	// Preostalih 6 bitova tj. addr[0..5] koriste se za pristup (2^6) 64 lokacije za pohranu podataka 
+	
+	RAM64(in = in, address = address[0..5], load = load0, out = out0);
+	RAM64(in = in, address = address[0..5], load = load1, out = out1);
+	RAM64(in = in, address = address[0..5], load = load2, out = out2);
+	RAM64(in = in, address = address[0..5], load = load3, out = out3);
+	RAM64(in = in, address = address[0..5], load = load4, out = out4);
+	RAM64(in = in, address = address[0..5], load = load5, out = out5);
+	RAM64(in = in, address = address[0..5], load = load6, out = out6);
+	RAM64(in = in, address = address[0..5], load = load7, out = out7);
+
+	// koristeci Mux8Way16 kombiniramo outpute ovih 8 RAM64 cipova
+	
+	Mux8Way16(a = out0, b = out1, c = out2,
+			d = out3, e = out4, f = out5,
+			g = out6, h = out7, sel = address[6..8], out = out);
+
+
+
+}

@@ -1,0 +1,18 @@
+CHIP TwosCompl{
+
+	IN in[16];
+	OUT out[16];
+	
+	PARTS:
+	//prvi korak: invertiranje bitova
+	
+	Not16(in=in, out=inverted);
+	
+	//stvaranje 16-bitnog broja 1
+	
+	Or16(a = false, b[0] = true, out = one);
+	
+	Add16(a = inverted, b = one, out = out);
+	
+
+}
