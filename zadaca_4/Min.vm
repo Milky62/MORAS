@@ -1,0 +1,38 @@
+push constant 5
+push constant 3
+push constant 2
+call Min.min 3
+
+
+function Min.min 3  // provjerava a < b
+    push argument 0
+    push argument 1
+    lt
+    if-goto AltB    // true -> provjeri a < c
+    goto BltA       // else -> provjeri b < c
+
+label AltB
+    push argument 0
+    push argument 2
+    lt
+    if-goto Amin    // true -> a najmanji
+    goto  Cmin      // else -> c najmanji
+
+label BltA
+    push argument 1
+    push argument 2
+    lt
+    if-goto Bmin    // true -> b najmanji
+    goto Cmin       // else -> c najmanji
+
+label Amin
+    push argument 0
+    return          // return a
+
+label Bmin
+    push argument 1
+    return          // return b
+
+label Cmin
+    push argument 2
+    return          // return c

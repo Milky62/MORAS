@@ -1,0 +1,35 @@
+push constant 4
+call Lucas.lucas 1 // treba return 1
+
+function Lucas.lucas 3
+
+push argument 0         
+push constant 2
+eq                  //provjera - arg ?= 2
+if-goto L2
+
+
+push argument 0
+push constant 1
+eq                 //provjera - arg ?= 1
+if-goto L1
+
+// rekurzivni slucaj: lucas(n-1) + lucas(n-2)
+push argument 0
+push constant 1
+sub
+call Lucas.lucas 1  // poziv na (n-1)
+push argument 0
+push constant 2
+sub
+call Lucas.lucas 1  // poziv na (n-2)
+add
+return
+
+label L2    // lucas(2) == 2
+push constant 2
+return
+
+label L1    // lucas(1) == 1
+push constant 1
+return
