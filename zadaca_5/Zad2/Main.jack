@@ -1,0 +1,63 @@
+class Main
+{
+    function void main()
+    {
+        var vint A, B;
+        var boolean b;
+
+        let A = vint.new(2);
+        let B = vint.new(2);
+
+        do A.set(0, 1);
+        do A.set(1, 2);
+        do A.set(2, 3);
+        do A.set(3, 4);
+
+        do B.set(0, 1);
+        do B.set(1, 2);
+        do B.set(2, 3);
+        do B.set(3, 4);
+
+        do Output.printString("len: ");
+        do Output.printInt(A.len());
+        do Output.println();
+
+        do Output.printString("get: ");
+        do Output.printInt(A.get(1));
+        do Output.println();
+
+        do A.resize(5);
+        do Output.printString("resize (new len): ");
+        do Output.printInt(A.len());
+        do Output.println();
+
+        do Output.printString("check if A and B are eq (they aren't): ");
+        let b = vint.is_eq(A, B);
+        if (b)
+        {
+            do Output.printString("true");
+        }
+        else
+        {
+            do Output.printString("false");
+        }
+        do Output.println();
+
+        do Output.printString("check elems(A,B): ");
+        let b = vint.elems(A, B);
+        if (b)
+        {
+            do Output.printString("true");
+        }
+        else
+        {
+            do Output.printString("false");
+        }
+        do Output.println();
+
+        do A.dispose();
+        do B.dispose();
+
+        return;
+    }
+}

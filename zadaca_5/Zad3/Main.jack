@@ -1,0 +1,54 @@
+
+class Main {
+	function void main() {
+		do Screen.clearScreen();
+
+		do Main.drawAxis();
+
+		do Main.drawGraph();
+		
+		return;
+	}
+
+
+	function void drawAxis() {
+		do Screen.drawLine(0, 127, 255, 127);
+		do Screen.drawLine(127, 0, 127, 255);
+
+		return;
+	}
+
+	function void drawGraph() {
+		var int i;
+		var int y;
+		var int ly;
+
+		let ly = -33;
+		let i = -32;
+
+		while (i < 33) {
+			let y = Main.f(i);
+
+			if ((-33 < y) & (y < 32)) {
+				do Screen.drawPixel(i + 127, 127 - y);
+			}
+
+			if ((-33 < ly) & (ly < 32) & (-33 < y) & (y < 32)) {
+				do Screen.drawLine(i + 126, 127 - ly, i + 127, 127 - y);
+			}
+
+			let ly = y;
+			let i = i + 1;
+		}	
+
+		return;
+	}
+
+	function int f(int x) {
+		if (x = 0) {
+			return -33;
+		}
+
+		return 24 / x;
+	}
+}

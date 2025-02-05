@@ -1,0 +1,51 @@
+
+class Qsort {
+	function void qsort(Array arr, int n) {
+		do Qsort.qsorth(arr, 0, n - 1);
+
+		return;
+	}
+
+	// qsort helper
+	function void qsorth(Array arr, int low, int high) {
+		var int p;
+		
+		if (low < high) {
+			let p = Qsort.partition(arr, low, high);
+			do Qsort.qsorth(arr, low, p - 1);
+			do Qsort.qsorth(arr, p + 1, high);
+		}
+
+		return;
+	}
+
+	function int partition(Array arr, int low, int high) {
+		var int pivot;
+		var int i;
+		var int j;
+		var int swap;
+
+		let pivot = arr[high];
+		let i = low - 1;
+
+		let j = low;
+
+		while (~(j > high)) {
+			if (arr[j] < pivot) {
+				let i = i + 1;
+
+				let swap = arr[j];
+				let arr[j] = arr[i];
+				let arr[i] = swap; 
+			}
+
+			let j = j + 1;
+		}
+
+		let swap = arr[high];
+		let arr[high] = arr[i + 1];
+		let arr[i + 1] = swap;
+
+		return i + 1;
+	}
+}

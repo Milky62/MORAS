@@ -1,0 +1,186 @@
+class vint 
+{   // 2. zadatak
+    field Array A;
+    field int size;
+
+    // b
+    constructor vint new(int n)
+    {
+        var int cnt;
+        let size = 1;
+
+        if (~(n < 0))
+        {
+            let cnt = 0;
+            while (cnt < n)
+            {
+                let size = size + size;
+                let cnt = cnt + 1;
+            }
+        }
+
+        let A = Array.new(size);
+        return this;
+    }
+
+    // a
+    method int len()
+    {
+        return size;
+    }
+
+    // c
+    method void set(int k, int v)
+    {
+        let A[k] = v;
+        return;
+    }
+
+    method int get(int k)
+    {
+        return A[k];
+    }
+
+    // d
+    method void resize(int m)
+    {
+        var int cnt, newSize, min;
+        var Array B;
+
+        let newSize = 1;
+
+        // doslovno konstruktor 
+        if (~(m < 0))
+        {
+            let cnt = 0;
+            while (cnt < m)
+            {
+                let newSize = newSize + newSize;
+                let cnt = cnt + 1;
+            }
+        }
+
+        let B = Array.new(newSize);
+
+        // find min(size, newSize)
+        let min = size;
+        if (newSize < min)
+        {
+            let min = newSize;
+        }
+
+        // move vector values
+        let cnt = 0;
+        while(cnt < min)
+        {
+            let B[cnt] = A[cnt];
+            let cnt = cnt + 1;
+        }
+
+        do A.dispose();
+        let A = B;
+        let size = newSize;
+
+        return;
+    }
+
+    // e
+    function boolean is_eq(vint A, vint B)
+    {
+        var int cnt;
+
+        if (~(A.len() = B.len()))
+        {
+            return false;
+        }
+
+        let cnt = 0;
+        while (cnt < A.len())
+        {
+            if (~(A[cnt] = B[cnt]))
+            {
+                return false;
+            }
+            let cnt = cnt + 1;
+        }
+
+        return true;
+    }
+
+    // f
+    function boolean elems(vint A, vint B)
+    {
+        var Array C, D;
+        var int cnt;
+
+        if (~(A.len() = B.len()))
+        {
+            return false;
+        }
+        
+        let C = vint.quicksort(A, 0, A.len());
+        let D = vint.quicksort(B, 0, B.len());
+
+        let cnt = 0;
+        while (cnt < A.len())
+        {   
+            if (~(C[cnt] = D[cnt]))
+            {
+                return false;
+            }
+            let cnt = cnt + 1;
+        }
+
+        return true;
+    }
+
+
+    method void dispose()
+    {
+        do A.dispose();
+        return;
+    }
+
+    function Array quicksort(vint B, int l, int r)
+    {
+        var int pivot, j, i, temp, cnt;
+        var Array A;
+
+        let A = Array.new(B.len());
+
+        let cnt = 0;
+        while(cnt < B.len())
+        {
+            let A[i] = V.get(i);
+            let cnt = cnt + 1;
+        }
+        
+        if (l < r)
+        {
+            let pivot = A[l];
+            let j = l;
+            let i = l + 1;
+
+            while(~(i > r))
+            {
+                if(A[i] < pivot)
+                {
+                    let j = j + 1;
+                    let temp = A[i];
+                    let A[i] = A[j];
+                    let A[j] = temp;
+                }
+                let i = i + 1;
+            }
+
+            let temp = A[j];
+            let A[j] = A[l];
+            let A[l] = temp;
+
+            let A = Sort.quicksort(A, l, j - 1);
+            let A = Sort.quicksort(A, j + 1, r);
+        }
+
+        return A;
+    }
+}
