@@ -49,7 +49,7 @@ class vint
 
         let newSize = 1;
 
-        // doslovno konstruktor 
+        // konstruktor 
         if (~(m < 0))
         {
             let cnt = 0;
